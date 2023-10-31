@@ -1,9 +1,10 @@
-from argparse import ArgumentParser
 from g4f.gui.server.app import app
-from g4f.gui.server.website import Website
 from g4f.gui.server.backend import Backend_Api
-import webbrowser
+from g4f.gui.server.website import Website
+
 import os
+import webbrowser
+from argparse import ArgumentParser
 
 
 def run_gui(host: str = '0.0.0.0', port: int = 80, debug: bool = False) -> None:
@@ -29,8 +30,9 @@ def run_gui(host: str = '0.0.0.0', port: int = 80, debug: bool = False) -> None:
             methods=backend_api.routes[route]['methods'],
         )
 
-    url = f"http://127.0.0.1:{port}"
-    webbrowser.open(url, new=0, autoraise=True)
+    if os.environ['AUTO_LAUNCH'] == 'true':
+        url = f"http://127.0.0.1:{port}"
+        webbrowser.open(url, new=0, autoraise=True)
     print(f"Running on port {config['port']}")
 
     app.run(**config)

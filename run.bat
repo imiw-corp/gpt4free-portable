@@ -1,6 +1,7 @@
 @echo off
 
 
+set AUTO_LAUNCH=true
 set USER_PORT=4585
 
 
